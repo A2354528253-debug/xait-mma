@@ -1,0 +1,4 @@
+/* 首页标识的动态笔触：两条连续的大弧线，避免任何直线感。 */
+.logo-thread{width:108%!important;height:78%!important;left:-4%!important;top:10%!important}.logo-thread path{stroke-width:3.5!important;stroke-dasharray:1500!important;stroke-dashoffset:1500!important;animation-duration:8.4s!important}.logo-thread-two{top:14%!important;left:1%!important;width:103%!important;height:76%!important}.logo-thread-two path{stroke-width:2.45!important;animation-delay:.55s!important}@keyframes logo-stroke{0%,8%{stroke-dashoffset:1500;opacity:0}14%{opacity:.9}71%{stroke-dashoffset:0;opacity:.9}89%,100%{stroke-dashoffset:-120;opacity:0}}
+
+footer a{color:inherit;text-decoration:none}footer a:hover{color:#f47721}
