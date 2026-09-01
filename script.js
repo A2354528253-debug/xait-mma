@@ -1,3 +1,4 @@
+const chineseScript=document.createElement('script');chineseScript.src='zh-cn.js';document.head.appendChild(chineseScript);
 const heroReset=document.createElement('link');heroReset.rel='stylesheet';heroReset.href='hero-reset.css';document.head.appendChild(heroReset);
 document.querySelectorAll('img.association-logo').forEach(image=>{image.src='assets/images/association-logo.png'});
 const joinCreditStyle=document.createElement('link');joinCreditStyle.rel='stylesheet';joinCreditStyle.href='join-credit.css';document.head.appendChild(joinCreditStyle);
