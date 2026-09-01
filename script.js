@@ -1,4 +1,5 @@
 const heroReset=document.createElement('link');heroReset.rel='stylesheet';heroReset.href='hero-reset.css';document.head.appendChild(heroReset);
+document.querySelectorAll('img.association-logo').forEach(image=>{image.src='assets/images/association-logo.png'});
 const joinCreditStyle=document.createElement('link');joinCreditStyle.rel='stylesheet';joinCreditStyle.href='join-credit.css';document.head.appendChild(joinCreditStyle);
 const footerCreditStyle=document.createElement('link');footerCreditStyle.rel='stylesheet';footerCreditStyle.href='footer-credit.css';document.head.appendChild(footerCreditStyle);
 const modelingMotionStyle=document.createElement('link');modelingMotionStyle.rel='stylesheet';modelingMotionStyle.href='codex-motion.css';document.head.appendChild(modelingMotionStyle);
