@@ -1,65 +1,40 @@
 # 西安工学院数学建模协会网站
 
-## 页面文件
+一个无需构建、可直接由 GitHub Pages 托管的静态网站。
 
-- `index.html`：协会首页
-- `training.html`：公开培训资料页
+## 页面与资源
 
-## 样式与交互文件
+- `index.html`：协会介绍、建模路径、实践与加入方式
+- `training.html`：培训资料、竞赛真题与论文模板归档
+- `faculty.html`：指导教师介绍
+- `styles.css`、`motion.js`、`site.js`、`training.js`：全站样式与交互
+- `resources/`：网站公开提供下载的本地资料
+  - `templates/`：Word 模板和待补充的 MATLAB 模板
+  - `ncmc/`、`mathcup/`、`shuwei/`：各赛事的真题与论文分类目录，命名规则见 `resources/README.txt`
 
-- `styles.css`：全站基础样式
-- `script.js`：首页交互与指导老师信息
-- `training.css`：培训资料页基础样式
-- `training.js`：培训资料页展开与资料卡逻辑
-- `training-cards.css`：竞赛资料卡片样式
+## 发布到 GitHub Pages
 
-其余 CSS 文件用于首页动效、页尾署名、指导老师和加入协会区块的局部样式
+1. 在 GitHub 创建一个空仓库。
+2. 将本文件夹里的**内容**上传到仓库根目录（不要多套一层 `Github上传部署` 文件夹）。
+3. 打开仓库 **Settings → Pages**。
+4. 在 **Build and deployment** 中选择 **Deploy from a branch**，分支选 `main`，目录选 `/(root)`，保存。
+5. 等 GitHub Pages 完成发布后，访问页面顶部显示的网址。
 
-## 图片
+本项目使用相对路径，支持 `username.github.io/repository/` 形式的项目站点。
 
-所有网站图片放在 `assets/images/`
+## 更新内容
 
-- `association-logo.png`：首页协会手写标识
+- 修改首页：编辑 `index.html`。
+- 更新指导教师：编辑 `faculty.html`。
+- 增加资料：按赛事放入 `resources/<赛事>/problems/` 或 `resources/<赛事>/papers/`，按年份命名文件，再在 `training.html` 增加对应年份下载卡。
+- MATLAB 论文模板放入 `resources/templates/matlab/` 后，将待上传按钮改为相对下载链接。
+- 新增真题或论文前，请确认文件允许公开下载，并检查文件大小和来源说明。
 
-网页引用图片时使用相对路径，例如：
+## 鼠标动效
 
-```html
-<img src="assets/images/association-logo.png" alt="数学建模协会手写标识">
-```
+桌面端指针会扰动全站背景里的函数曲线与数据点。触屏设备不启动连续指针动画；启用系统“减少动态效果”时会关闭动效。网站没有框架或构建依赖。
 
-## 公开下载资料
 
-所有公开下载资料放在 `resources/`
 
-```text
-resources/
-├── templates/                 论文模板
-│   └── 模板.docx
-├── ncmc/                      全国大学生数学建模竞赛
-│   ├── problems/              历年真题
-│   │   ├── CUMCM2025.zip
-│   │   ├── CUMCM2024.zip
-│   │   ├── CUMCM2023.zip
-│   │   ├── CUMCM2022.zip
-│   │   ├── CUMCM2021.zip
-│   │   └── CUMCM2020.zip
-│   └── papers/                优秀论文
-├── mathcup/                   华数杯国赛
-│   ├── problems/              历年真题
-│   └── papers/                优秀论文
-└── training/                  其他公开培训资料
-```
 
-## 文件命名规则
 
-- 已有真题压缩包保持当前名称，不改名
-- 新增全国大学生数学建模竞赛真题建议使用 `CUMCM年份.zip`
-- 新增优秀论文建议使用 `CUMCM年份-优秀论文.zip`
-- 华数杯资料建议使用 `MathCup年份.zip` 或 `MathCup年份-优秀论文.zip`
-
-## 维护注意事项
-
-- 只使用相对路径，例如 `resources/ncmc/problems/CUMCM2024.zip`
-- 不要使用 `C:\Users\...`、`D:\...` 或 `file:///...` 本机绝对路径
-- 新增资料后需要在 `training.js` 中为对应年份资料卡增加下载链接
-- 公开发布前，请确认资料允许公开转载与下载

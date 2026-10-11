@@ -1,9 +1,50 @@
-const chineseScript=document.createElement('script');chineseScript.src='zh-cn.js';document.head.appendChild(chineseScript);
-const cardsStyle=document.createElement('link');cardsStyle.rel='stylesheet';cardsStyle.href='training-cards.css';document.head.appendChild(cardsStyle);
-const footerCreditStyle=document.createElement('link');footerCreditStyle.rel='stylesheet';footerCreditStyle.href='footer-credit.css';document.head.appendChild(footerCreditStyle);
-const years=[2025,2024,2023,2022,2021,2020];
-const releaseBase='https://github.com/A2354528253-debug/xait-mma/releases/download/cumcm-problems';
-const files={ncmc:{2025:`${releaseBase}/CUMCM2025.zip`,2024:`${releaseBase}/CUMCM2024.zip`,2023:`${releaseBase}/CUMCM2023.zip`,2022:`${releaseBase}/CUMCM2022.zip`,2021:`${releaseBase}/CUMCM2021.zip`,2020:`${releaseBase}/CUMCM2020.zip`}};
-function yearCards(type,kind){return years.map(year=>{const href=kind==='problems'?files[type]?.[year]:null;const title=kind==='problems'?`${year} 年真题`:`${year} 年优秀论文`;const text=href?`下载 ${year} 年真题`:'文件尚未上传';return `<article class="year-card"><div class="resource-type">${year}<br><span>${kind==='problems'?'题目':'论文'}</span></div><div class="resource-detail"><p class="mono">${kind==='problems'?'PROBLEM SET':'SELECTED PAPERS'} / ${year}</p><h3>${title}</h3><p>${href?'公开资料，可直接下载':'资料尚未上传，后续将持续补充'}</p></div>${href?`<a class="download-button" href="${href}" target="_blank" rel="noopener">${text} <b>↓</b></a>`:'<span class="pending">待上传</span>'}</article>`}).join('')}
-document.querySelectorAll('.archive-toggle').forEach(button=>button.addEventListener('click',()=>{const group=button.closest('.archive-group');const open=group.classList.toggle('open');button.setAttribute('aria-expanded',open)}));
-document.querySelectorAll('.sub-toggle').forEach(button=>button.addEventListener('click',()=>{const sub=button.closest('.sub-group');if(!sub.querySelector('.year-card')){const label=sub.querySelector('strong').textContent;const type=sub.closest('.archive-group').querySelector('.archive-number').textContent==='01'?'ncmc':'mathcup';const kind=label.includes('真题')?'problems':'papers';sub.querySelector('.sub-content').innerHTML=yearCards(type,kind)}const open=sub.classList.toggle('open');button.setAttribute('aria-expanded',open)}));
+(() => {
+  const years = [2025, 2024, 2023, 2022, 2021, 2020];
+  const release = 'https://github.com/A2354528253-debug/xait-mma/releases/download/cumcm-problems';
+  const files = {
+    ncmc: { problems: Object.fromEntries(years.map(year => [year, `${release}/CUMCM${year}.zip`])) }
+  };
+
+  function yearCards(competition, kind) {
+    return years.map(year => {
+      const href = files[competition]?.[kind]?.[year];
+      const label = kind === 'problems' ? '历年真题' : '优秀论文';
+      const action = href
+        ? `<a class="download-button" href="${href}" target="_blank" rel="noopener">下载 ${year} 年资料 <b>↓</b></a>`
+        : '<span class="pending">待上传</span>';
+      const description = href ? '公开资料，可直接下载' : '资料尚未上传，后续将按年份补充';
+      return `<article class="year-card"><div class="resource-type">${year}<br><span>${kind === 'problems' ? '题目' : '论文'}</span></div><div class="resource-detail"><p class="eyebrow">${label} / ${year}</p><h3>${year} 年${label}</h3><p>${description}</p></div>${action}</article>`;
+    }).join('');
+  }
+
+  document.querySelectorAll('.archive-toggle').forEach(button => {
+    button.addEventListener('click', () => {
+      const group = button.closest('.archive-group');
+      const content = group.querySelector('.archive-content');
+      const open = group.classList.toggle('open');
+      button.setAttribute('aria-expanded', String(open));
+      content.setAttribute('aria-hidden', String(!open));
+      content.toggleAttribute('inert', !open);
+      content.querySelectorAll('.sub-content').forEach(panel => panel.toggleAttribute('inert', !open || !panel.closest('.sub-group').classList.contains('open')));
+    });
+  });
+
+  document.querySelectorAll('.sub-toggle').forEach(button => {
+    button.addEventListener('click', () => {
+      const group = button.closest('.sub-group');
+      const parent = group.closest('.archive-group');
+      const content = group.querySelector('.sub-content');
+      if (!content.dataset.loaded) {
+        content.innerHTML = yearCards(parent.dataset.competition, group.dataset.kind);
+        content.dataset.loaded = 'true';
+      }
+      const open = group.classList.toggle('open');
+      button.setAttribute('aria-expanded', String(open));
+      content.setAttribute('aria-hidden', String(!open));
+      content.toggleAttribute('inert', !open);
+
+    });
+  });
+})();
+
+
