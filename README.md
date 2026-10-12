@@ -8,9 +8,8 @@
 - `training.html`：培训资料、竞赛真题与论文模板归档
 - `faculty.html`：指导教师介绍
 - `styles.css`、`motion.js`、`site.js`、`training.js`：全站样式与交互
-- `resources/`：网站公开提供下载的本地资料
-  - `templates/`：Word 模板和待补充的 MATLAB 模板
-  - `ncmc/`、`mathcup/`、`shuwei/`：各赛事的真题与论文分类目录，命名规则见 `resources/README.txt`
+- `resources/templates/`：不超过 1MB 的小型资料，如数学建模论文模板
+- GitHub Releases：大于 1MB 的历年真题与优秀论文压缩包，命名规则见 `resources/README.txt`
 
 ## 发布到 GitHub Pages
 
@@ -26,9 +25,9 @@
 
 - 修改首页：编辑 `index.html`。
 - 更新指导教师：编辑 `faculty.html`。
-- 增加资料：按赛事放入 `resources/<赛事>/problems/` 或 `resources/<赛事>/papers/`，按年份命名文件，再在 `training.html` 增加对应年份下载卡。
-- MATLAB 论文模板放入 `resources/templates/matlab/` 后，将待上传按钮改为相对下载链接。
-- 新增真题或论文前，请确认文件允许公开下载，并检查文件大小和来源说明。
+- 增加小型资料（不超过 1MB）：放入 `resources/templates/`，在 `training.html` 或 `training.js` 中写入相对路径。
+- 增加真题或优秀论文压缩包：先在 GitHub Releases 发布附件，再把 `training.js` 中 `release` 常量与 `files` 映射指向该发行版本。
+- 新增资料前，请确认文件允许公开下载，并检查文件大小和来源说明。
 
 ## 鼠标动效
 
